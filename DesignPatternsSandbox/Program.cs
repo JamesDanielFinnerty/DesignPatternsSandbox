@@ -18,14 +18,14 @@ namespace DesignPatternsSandbox
                 .BuildServiceProvider();
 
             // Instantiate helper and grab some test data
-            var flights = new FlightAPIHelper().GetFlights();
+            var flights = new FlightAPIHelper().GetTestFlights();
 
             // Get a filter from our factory, specifying safety
-            var filter = new FlightFilterFactory(true).GetFilter();
-            filter.SetModelCollection(flights);
+            var filter = new FlightFilterFactory(false).GetFilter();
 
             // execute our fluent filter
             var filteredFlights = filter
+                .SetModelCollection(flights)
                 .DepartAfter(System.DateTime.Now)
                 .RemoveErroneusFlights()
                 .RemoveLongLayover(5400)

@@ -8,5 +8,6 @@ namespace DesignPatternsSandbox.Factories.Interfaces
     public interface IFlightFilterFactory
     {
         public IFlightFilter GetFilter();
+
     }
 }

@@ -27,9 +27,8 @@ namespace DesignPatternsSandbox.Tests.ModelFilterTests
 
             // call our function to test
             var filterToTest = new FlightFilter();
-            filterToTest.SetModelCollection(flights);
 
-            var results = filterToTest.DepartAfter(departureDateToTest.AddDays(-1)).Evaluate();
+            var results = filterToTest.SetModelCollection(flights).DepartAfter(departureDateToTest.AddDays(-1)).Evaluate();
 
             Assert.AreEqual(results.Count, 1);
         }
@@ -59,9 +58,8 @@ namespace DesignPatternsSandbox.Tests.ModelFilterTests
 
             // call our function to test
             var filterToTest = new FlightFilter();
-            filterToTest.SetModelCollection(flights);
 
-            var results = filterToTest.DepartAfter(departureDateToTest).Evaluate();
+            var results = filterToTest.SetModelCollection(flights).DepartAfter(departureDateToTest).Evaluate();
 
             Assert.AreEqual(results.Count, 1);
         }

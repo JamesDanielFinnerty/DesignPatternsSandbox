@@ -11,11 +11,9 @@ namespace DesignPatternsSandbox.ModelFilter
         { 
             
         }
-
-        public override IList<Flight> Evaluate()
+        public override InnerFlightFilter SetModelCollection(IList<Flight> modelsToWorkWith)
         {
-            base.RemovePlaneType("737MAX");
-            return base.Evaluate();
+            return new InnerFlightFilter(modelsToWorkWith).RemovePlaneType("737MAX");
         }
     }
 }

@@ -16,8 +16,7 @@ namespace DesignPatternsSandbox.Tests.ModelTests
             var flight = new Flight();
 
             // create our segment with it's departure set to be the target data
-            var segment1 = new Segment();
-            segment1.Departure = departureDateToTest;
+            var segment1 = new SegmentBuilder().SetDeparture(departureDateToTest).Build();
 
             flight.Segments.Add(segment1);
 

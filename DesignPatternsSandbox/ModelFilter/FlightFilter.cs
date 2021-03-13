@@ -11,49 +11,9 @@ namespace DesignPatternsSandbox.ModelFilter
     {
         public FlightFilter()
         { }
-
-        private IEnumerable<Flight> _modelsToWorkWith;
-
-        public void SetModelCollection(IList<Flight> modelsToWorkWith)
+        public virtual InnerFlightFilter SetModelCollection(IList<Flight> modelsToWorkWith)
         {
-            this._modelsToWorkWith = modelsToWorkWith;
-        }
-
-        public FlightFilter DepartAfter(DateTime targetDateTime)
-        {
-            this._modelsToWorkWith = this._modelsToWorkWith
-                .Where(x => x.GetDeparture() > targetDateTime);
-
-            return this;
-        }
-
-        public FlightFilter RemovePlaneType(string planeType)
-        {
-            this._modelsToWorkWith = this._modelsToWorkWith
-                .Where(x => x.Segments.Where(y => y.PlaneType != planeType).Any());
-
-            return this;
-        }
-
-        public FlightFilter RemoveErroneusFlights()
-        {
-            this._modelsToWorkWith = this._modelsToWorkWith
-                .Where(x => x.ContainsErroneousSegment() == false);
-
-            return this;
-        }
-
-        public FlightFilter RemoveLongLayover(Double maxSecondsOnGround)
-        {
-            this._modelsToWorkWith = this._modelsToWorkWith
-                .Where(x => x.SecondsSpentOnGround() < maxSecondsOnGround);
-
-            return this;
-        }
-
-        public virtual IList<Flight> Evaluate()
-        {
-            return this._modelsToWorkWith.ToList();
+            return new InnerFlightFilter(modelsToWorkWith);
         }
 
     }
