@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using DesignPatternsSandbox.Helpers;
 using DesignPatternsSandbox.ModelFilter;
 using DesignPatternsSandbox.ModelFilter.Interfaces;
+using DesignPatternsSandbox.Factories.Interfaces;
+using DesignPatternsSandbox.Factories;
 
 namespace DesignPatternsSandbox
 {
@@ -18,22 +20,15 @@ namespace DesignPatternsSandbox
             // Instantiate helper and grab some test data
             var flights = new FlightAPIHelper().GetFlights();
 
-            // Lets get our flight filter and give it some data
-            var filter = serviceProvider.GetService<IFlightFilter>();
+            // Get a filter from our factory, specifying safety
+            var filter = new FlightFilterFactory(true).GetFilter();
             filter.SetModelCollection(flights);
 
             // execute our fluent filter
             var filteredFlights = filter
                 .DepartAfter(System.DateTime.Now)
-                .RemoveErroneusFlights() // removes weird back to front segments
-                .RemoveLongLayover(5400) // remove flights with more than 1.5 hours of layover (in seconds)
-                .Evaluate();
-
-            var non737MaxFilter = new SafeFlightFilter();
-            non737MaxFilter.SetModelCollection(flights);
-
-            // safe filter, extend base filter but remove 737MAX's by default
-            var safeFilteredFlights = non737MaxFilter
+                .RemoveErroneusFlights()
+                .RemoveLongLayover(5400)
                 .Evaluate();
 
             //print and format valid results

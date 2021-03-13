@@ -9,6 +9,7 @@ namespace DesignPatternsSandbox.Models
         public DateTime Departure { get; set; }
         public DateTime Arrival { get; set; }
         public string PlaneType { get; set; }
+        public bool HasBusinessClass { get; set; }
 
         public bool ArrivesBeforeDeparture()
         {
@@ -22,6 +23,7 @@ namespace DesignPatternsSandbox.Models
             results.AppendLine("Departs " + Departure.ToString());
             results.AppendLine("Arrives " + Arrival.ToString());
             results.AppendLine("Plane " + PlaneType);
+            results.AppendLine("Buis.Class avail. " + HasBusinessClass);
 
             return results.ToString();
         }

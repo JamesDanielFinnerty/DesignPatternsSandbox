@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DesignPatternsSandbox.Models;
+using DesignPatternsSandbox.Tests.TestHelpers;
 
 namespace DesignPatternsSandbox.Tests.ModelTests
 {
@@ -34,11 +35,9 @@ namespace DesignPatternsSandbox.Tests.ModelTests
 
             var flight = new Flight();
 
-            // create two segments, one with target data, one a day later.
-            var segment1 = new Segment();
-            segment1.Departure = departureDateToTest;
-            var segment2 = new Segment();
-            segment2.Departure = departureDateToTest.AddDays(2);
+            // create two segments, one with target date, one a day later.
+            var segment1 = new SegmentBuilder().SetDeparture(departureDateToTest).Build();
+            var segment2 = new SegmentBuilder().SetDeparture(departureDateToTest.AddDays(2)).Build();
 
             // add them in the in correct order to check we are getting the earliest
             flight.Segments.Add(segment2);
