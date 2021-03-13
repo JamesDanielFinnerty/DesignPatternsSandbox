@@ -29,8 +29,15 @@ namespace DesignPatternsSandbox
                 .RemoveLongLayover(5400) // remove flights with more than 1.5 hours of layover (in seconds)
                 .Evaluate();
 
+            var non737MaxFilter = new SafeFlightFilter();
+            non737MaxFilter.SetModelCollection(flights);
+
+            // safe filter, extend base filter but remove 737MAX's by default
+            var safeFilteredFlights = non737MaxFilter
+                .Evaluate();
+
             //print and format valid results
-            for(int i = 0; i < filteredFlights.Count; i++)
+            for (int i = 0; i < filteredFlights.Count; i++)
             {
                 // give flight a name
                 Console.WriteLine("Flight " + (i + 1).ToString());

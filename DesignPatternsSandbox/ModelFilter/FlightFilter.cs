@@ -27,6 +27,14 @@ namespace DesignPatternsSandbox.ModelFilter
             return this;
         }
 
+        public FlightFilter RemovePlaneType(string planeType)
+        {
+            this._modelsToWorkWith = this._modelsToWorkWith
+                .Where(x => x.Segments.Where(y => y.PlaneType != planeType).Any());
+
+            return this;
+        }
+
         public FlightFilter RemoveErroneusFlights()
         {
             this._modelsToWorkWith = this._modelsToWorkWith
@@ -43,7 +51,7 @@ namespace DesignPatternsSandbox.ModelFilter
             return this;
         }
 
-        public IList<Flight> Evaluate()
+        public virtual IList<Flight> Evaluate()
         {
             return this._modelsToWorkWith.ToList();
         }

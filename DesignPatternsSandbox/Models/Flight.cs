@@ -62,8 +62,7 @@ namespace DesignPatternsSandbox.Models
                 results.AppendLine("");
                 results.AppendLine("Segment " + (i+1).ToString());
                 results.AppendLine("----------");
-                results.AppendLine("Departs " + segments[i].Departure.ToString());
-                results.AppendLine("Arrives " + segments[i].Arrival.ToString());
+                results.AppendLine(segments[i].ToString());
             }
 
             return results.ToString();
